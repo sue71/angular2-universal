@@ -7,24 +7,21 @@
     "url": "https://github.com/angular/universal-starter.git"
   },
   "scripts": {
-    "watch": "webpack --watch",
+    "watch": "NODE_ENV=development webpack --watch",
     "prebuild": "rimraf dist",
-    "build": "webpack",
-    "build:prod": "webpack --progress -p",
+    "build": "npm run build:dev",
+    "build:dev": "NODE_ENV=development webpack",
+    "build:prod": "NODE_ENV=production webpack --progress",
     "prestart": "npm run build",
     "server": "nodemon dist/server/index.js",
     "start": "npm run server",
-    "predebug": "npm run build",
-    "debug:build": "node-nightly --inspect --debug-brk node_modules/webpack/bin/webpack.js",
-    "debug": "node --debug-brk dist/server/index.js"
+    "test": "NODE_ENV=production karma start",
+    "test-watch": "NODE_ENV=production karma start --no-single-run",
+    "e2e": "protractor protractor.conf.js"
   },
   "license": "MIT",
   "contributors": [
-    "AngularClass <hello@angularclass.com>",
-    "PatrickJS <patrick@angularclass.com>",
-    "Jeff Whelpley <jeff@gethuman.com>",
-    "Jeff Cross <crossj@google.com>",
-    "Mark Pieszak <mpieszak84@gmail.com>"
+    "sue71<s.masaki07@gmail.com>"
   ],
   "dependencies": {
     "@angular/common": "2.0.0-rc.4",
@@ -55,6 +52,15 @@
     "@types/serve-static": "^1.7.27",
     "angular2-template-loader": "^0.4.0",
     "cookie-parser": "^1.4.3",
+    "karma": "^1.2.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-cli": "^1.0.1",
+    "karma-coverage": "^1.1.1",
+    "karma-mocha": "^1.1.1",
+    "karma-mocha-reporter": "^2.1.0",
+    "karma-phantomjs-launcher": "^1.0.2",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "^1.8.0",
     "nodemon": "^1.10.0",
     "raw-loader": "^0.5.1",
     "rimraf": "^2.5.4",

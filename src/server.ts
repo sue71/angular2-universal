@@ -6,13 +6,15 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as cookieParser from 'cookie-parser';
 
-// Angular 2
+// dummy server
+import { serverApi } from './backend/api';
+
 import { enableProdMode } from '@angular/core';
-// Angular 2 Universal
 import { expressEngine } from 'angular2-universal';
 
-// enable prod for faster renders
-enableProdMode();
+if (process.env.NODE_ENV === 'production') {
+  enableProdMode();
+}
 
 const app = express();
 const ROOT = path.join(path.resolve(__dirname, '..'));
@@ -22,38 +24,26 @@ app.engine('.html', expressEngine);
 app.set('views', __dirname);
 app.set('view engine', 'html');
 
-app.use(cookieParser('Angular 2 Universal'));
+app.use(cookieParser());
 app.use(bodyParser.json());
 
 // Serve static files
 app.use('/assets', express.static(path.join(__dirname, 'assets'), {maxAge: 30}));
 app.use(express.static(path.join(ROOT, 'dist/client'), {index: false}));
 
+import { ngApp } from './main.node';
 
-import { serverApi } from './backend/api';
-// Our API for demos only
 app.get('/data.json', serverApi);
 
-import { ngApp } from './main.node';
-// Routes with html5pushstate
-// ensure routes match client-side-app
+// TODO: use route settings
 app.get('/', ngApp);
-app.get('/about', ngApp);
-app.get('/about/*', ngApp);
 app.get('/home', ngApp);
 app.get('/home/*', ngApp);
 
-// use indexFile over ngApp only when there is too much load on the server
-function indexFile(req, res) {
-  // when there is too much load on the server just send
-  // the index.html without prerendering for client-only
-  res.sendFile('/index.html', {root: __dirname});
-}
-
 app.get('*', function(req, res) {
   res.setHeader('Content-Type', 'application/json');
-  var pojo = { status: 404, message: 'No Content' };
-  var json = JSON.stringify(pojo, null, 2);
+  const pojo = { status: 404, message: 'No Content' };
+  const json = JSON.stringify(pojo, null, 2);
   res.status(404).send(json);
 });
 

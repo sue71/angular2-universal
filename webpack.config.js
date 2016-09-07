@@ -1,7 +1,7 @@
-var webpack = require('webpack');
-var path = require('path');
+const webpack = require('webpack');
+const path = require('path');
 
-var commonConfig = {
+const commonConfig = {
   resolve: {
     extensions: ['', '.ts', '.js', '.json']
   },
@@ -20,7 +20,7 @@ var commonConfig = {
 };
 
 
-var clientConfig = {
+const clientConfig = {
   target: 'web',
   entry: './src/client',
   output: {
@@ -36,7 +36,7 @@ var clientConfig = {
 };
 
 
-var serverConfig = {
+const serverConfig = {
   target: 'node',
   entry: './src/server', // use the entry file of the node server if everything is ts rather than es5
   output: {
@@ -56,7 +56,7 @@ var serverConfig = {
 
 
 // Default config
-var defaultConfig = {
+const defaultConfig = {
   context: __dirname,
   resolve: {
     root: root('/src')
@@ -69,7 +69,7 @@ var defaultConfig = {
 
 
 
-var webpackMerge = require('webpack-merge');
+const webpackMerge = require('webpack-merge');
 module.exports = [
   // Client
   webpackMerge({}, defaultConfig, commonConfig, clientConfig),
