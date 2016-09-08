@@ -1,73 +1,56 @@
-const path = require('path');
-const webpackConfig = require('./webpack.config.js');
+const testWebpackConfig = require('./webpack.test.js');
+const helpers = require('./helpers');
 
-const WEBPACK_TESTING_CONFIG = webpackConfig.TESTING_CONFIG;
+module.exports = function(config) {
 
-module.exports = config => {
   config.set({
 
     basePath: '',
-    frameworks: ['mocha', 'chai'],
 
-    plugins: [
-      'karma-chai',
-      'karma-mocha',
-      'karma-mocha-reporter',
-      'karma-coverage',
-      'karma-sourcemap-loader',
-      'karma-webpack',
-    ],
+    frameworks: ['jasmine'],
 
-    // list of files / patterns to load in the browser
+    exclude: [],
+
     files: [
-      'src/**/*.spec.ts',
-      'src/**/*.spec.js'
+      {
+        pattern: './src/spec.ts',
+        watched: false
+      }
     ],
 
     preprocessors: {
-      'src/**/*.spec.ts': ['webpack', 'sourcemap']
+      './src/spec.ts': ['webpack', 'sourcemap']
     },
 
-    reporters: ['mocha', 'coverage'],
-
-    client: {
-      mocha: {
-        reporter: 'html',
-        ui: 'bdd',
-      },
-      captureConsole: true
-    },
-
-    webpack: webpackConfig,
-
-    webpackServer: {
-      noInfo: true
-    }
-
-    port: 9876,
+    // Webpack Config at ./webpack.test.js
+    webpack: testWebpackConfig,
 
     coverageReporter: {
-      dir: 'coverage',
-      subdir: function(browser) {
-        return browser.toLowerCase().split(/[ \-]/)[0];
-      },
+      dir : 'coverage/',
       reporters: [
-        { type: 'json', subdir: '.', file: 'coverage.json' },
-        { type: 'text', subdir: '.', file: 'coverage.txt' },
-        { type: 'text-summary', subdir: '.' },
-      ],
+        { type: 'text-summary' },
+        { type: 'json' },
+        { type: 'html' }
+      ]
     },
+
+    webpackServer: { noInfo: true },
+
+    reporters: [ 'mocha', 'coverage' ],
+
+    port: 9876,
 
     colors: true,
 
     logLevel: config.LOG_INFO,
 
-    autoWatch: true,
+    autoWatch: false,
 
-    browsers: ['Chrome'],
+    browsers: [
+      'Chrome'
+    ],
 
-    singleRun: true,
+    singleRun: true
 
-    concurrency: Infinity
-  })
-}
+  });
+};
