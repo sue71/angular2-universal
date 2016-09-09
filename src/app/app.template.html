@@ -1,23 +1,15 @@
-<h3 id="universal">Angular2 Universal Sample</h3>
+<h3 id="universal">beauty-admin</h3>
 <nav>
-  <a [routerLinkActive]="['active', 'router-link-active']" [routerLink]=" ['./home'] ">Home</a>
+<a [routerLinkActive]="['active', 'router-link-active']" [routerLink]=" ['./home'] ">Home</a>
 </nav>
 <div class="">
-  <div class="">
-    <div>
-      <span x-large>Universal JavaScript {{ title }}!</span>
-    </div>
-
-    Two-way binding: <input type="text" [value]="title" (input)="title = $event.target.value" autofocus>
-
-    <strong>Async data call return value:</strong>
-    <pre>{{ data | json }}</pre>
-
-    <strong>Router-outlet:</strong>
-    <main>
-      <router-outlet></router-outlet>
-    </main>
-
-    <blockquote>{{ server }}</blockquote>
+  <div>
+    <span>{{ title }}</span>
   </div>
+
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+
+  <blockquote>{{ server }}</blockquote>
 </div>

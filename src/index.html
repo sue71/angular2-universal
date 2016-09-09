@@ -9,11 +9,6 @@
 
   <meta name="description" content="<%= webpackConfig.metadata.title %>">
 
-  <% if (webpackConfig.htmlElements.headTags) { %>
-  <!-- Configured Head Tags  -->
-  <%= webpackConfig.htmlElements.headTags %>
-  <% } %>
-
   <!-- base url -->
   <base href="<%= webpackConfig.metadata.baseUrl %>">
 
@@ -25,9 +20,9 @@
     Loading...
   </app>
 
-  <% if (webpackConfig.metadata.isDevServer && webpackConfig.metadata.HMR !== true) { %>
+  <% if (webpackConfig.metadata.HOT) { %>
   <!-- Webpack Dev Server reload -->
-  <script src="<% webpackConfig.metadata.host %>:<%= webpackConfig.meatadata.port %>/webpack-dev-server.js"></script>
+  <script src="<%= webpackConfig.devServer.host %>:<%= webpackConfig.devServer.port %>/webpack-dev-server.js"></script>
   <% } %>
 
 
