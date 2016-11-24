@@ -1,10 +1,10 @@
 {
   "name": "universal-starter",
   "version": "2.0.0",
-  "description": "Angular 2 Universal starter kit by @AngularClass",
+  "description": "Angluar2 starter",
   "repository": {
     "type": "git",
-    "url": "https://github.com/angular/universal-starter.git"
+    "url": "https://github.com/sue71/angualr2-universal-boilerplate"
   },
   "scripts": {
     "watch-client": "webpack-dev-server --config webpack.config.js --progress --profile --watch --content-base src/",

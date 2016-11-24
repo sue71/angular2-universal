@@ -18,7 +18,7 @@ describe('App', () => {
   ]);
 
   it('Check if it works', inject([ App ], (app: App) => {
-    expect(app.title).toEqual('beauty-admin');
+    expect(app.title).toEqual('app');
   }));
 
 });

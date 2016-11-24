@@ -9,8 +9,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 console.log(path.resolve(__dirname, 'dist'));
 const commonConfig = {
   metadata: {
-    title: 'beauty-admin',
-    baesUrl: 'http://localhost:3000',
+    title: 'angular-universal',
+    baesUrl: 'http://localhost:8080',
     HOT: true
   },
   devServer: {

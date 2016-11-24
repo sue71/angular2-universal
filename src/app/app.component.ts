@@ -10,8 +10,9 @@ import { Http } from '@angular/http';
   templateUrl: 'app.template.html'
 })
 export class App {
-  title: string = 'beauty-admin';
+  title: string = 'angular2 universal';
   server: string;
+
   constructor(public http: Http) { }
 
   ngOnInit() {
